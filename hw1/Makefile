@@ -1,4 +1,5 @@
 all:
-	gcc hw1.c -o hw1 
+	gcc compressor.c -o compressor 
 clean:
-	rm -rf hw1
+	rm -rf compressor
+	rm -rf output.txt
