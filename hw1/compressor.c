@@ -41,22 +41,7 @@ int main(int argc, char *argv[]){
     fclose(output_file);
     return 0;
 }
-/*
-unsigned char *read_input(){
-    int length = 1000; //initial size
-    unsigned char *hex_input = malloc(length * sizeof(unsigned char)); //allocate mem for 1000 chars
-    if(!hex_input)
-        printf("allocate memory error\n");
-    int count = 0; //to keep track of how many chars have been used
-    unsigned char c; // to store the current unsigned char
-    while((c = getchar()) != '\n'){ //keep reading until a newline
-        if(count >= length)
-            hex_input = realloc(hex_input, (length += 100) * sizeof(unsigned char)); //add room for 100 more chars
-        hex_input[count++] = c;
-    }
-    return hex_input;
-}
-*/
+
 unsigned char* hex_to_base64(unsigned char *hex_input){
     int input_size = strlen(hex_input);
     int output_size = (((input_size*2)%3)==0) ? (input_size*2)/3 : ((input_size*2)/3)+1;
