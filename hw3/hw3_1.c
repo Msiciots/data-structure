@@ -59,12 +59,12 @@ int main(int argc, char *argv[]) {
       if (!strcmp(p, "A")) {
           if(head_qA)
               tail_qA = tail_qA->next = tmp; 
-          else
+          else // first element in queue A
               head_qA = tail_qA = tmp;
       } else if (!strcmp(p, "B")) {
           if(head_qB)
               tail_qB = tail_qB->next = tmp; 
-          else
+          else // first element in queue B
               head_qB = tail_qB = tmp;
       }
     } else if (!strcmp(p, "DEQUEUE")) {
@@ -89,12 +89,11 @@ int main(int argc, char *argv[]) {
       }
       if(head_output){
         tail_output = tail_output->next = tmp;
-        tmp->next = NULL;
       }
       else{ // first element in output list
         head_output = tail_output = tmp;
-        tmp->next = NULL;
       }
+        tmp->next = NULL;
     }
   }
   for (node_q *p = head_output; p; p = p->next) {
