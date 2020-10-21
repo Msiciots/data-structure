@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 typedef struct node {
-    int value;
-    struct node *next;
+  int value;
+  struct node *next;
 } node_t;
 void read_list(node_t **head, node_t **tail, char *inputfile) {
   FILE *f = fopen(inputfile, "r");
@@ -27,12 +27,16 @@ void read_list(node_t **head, node_t **tail, char *inputfile) {
 void print_list(node_t *head, FILE *output) {
   node_t *tmp;
   for (tmp = head; tmp; tmp = tmp->next) {
+
     if (tmp->value > 10)
-      fprintf(output, "%c ", tmp->value);
+      fprintf(output, "%c", tmp->value);
     else
-      fprintf(output, "%d ", tmp->value);
+      fprintf(output, "%d", tmp->value);
+    if (tmp->next)
+      fprintf(output, " ");
+    else
+      fprintf(output, "\n");
   }
-  fprintf(output, "\n");
 }
 void draw(node_t *head, node_t *tail, FILE *output) {
   int index = 13;
