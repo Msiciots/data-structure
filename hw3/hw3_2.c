@@ -14,10 +14,9 @@ void read_list(node_t **head, node_t **tail, char *inputfile) {
     // atoi(line) == 0 -> 'A', 'J', 'Q', 'K'
     // atoi(line) != 0 -> 2 ~ 10
     new_node->value = atoi(line) ? atoi(line) : line[0];
-    if (!*head) {
+    if (!*head) { // Add first element to list
       *head = new_node;
       *tail = new_node;
-
     } else {
       (*tail)->next = new_node;
       (*tail) = new_node;
@@ -58,12 +57,12 @@ void draw(node_t *head, node_t *tail, FILE *output) {
       break;
     }
 
-    if (head->value == a) {
+    if (head->value == a) { // draw out
       node_t *tmp = head;
       head = head->next;
       free(tmp);
       index--;
-    } else {
+    } else { // move to tail
       tail = tail->next = head;
       head = head->next;
       tail->next = NULL;

@@ -29,6 +29,8 @@ int main(int argc, char *argv[]) {
   char line[256];
   int count = 1;
   while (fgets(line, sizeof(line), input)) {
+      getchar();
+      printf("%s\n",line);
     char *p = strtok(line, " ");
     if (!strcmp(p, "PUSH")) {
       p = strtok(NULL, "\n");
@@ -45,6 +47,7 @@ int main(int argc, char *argv[]) {
       tmp->next = NULL;
       
     } else if (!strcmp(p, "POP\n") || !strcmp(p, "POP\r\n")) {   
+      printf("pop in\n");
       pop_element = tail_s->value;
       tail_s = tail_s->pre;
       if(tail_s){ // if still have element in stack
