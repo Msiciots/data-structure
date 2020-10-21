@@ -38,13 +38,13 @@ int main(int argc, char *argv[]) {
           tmp->pre = tail_s;
           tail_s = tail_s->next = tmp;
       }
-      else {           // first element in stack
+      else { // first element in stack
           tmp->pre = NULL;
           tail_s = tmp;
       }
       tmp->next = NULL;
       
-    } else if (!strcmp(p, "POP\r\n")) { // if something wrong here modify to "POP\n" 
+    } else if (!strcmp(p, "POP\n") || !strcmp(p, "POP\r\n")) {   
       pop_element = tail_s->value;
       tail_s = tail_s->pre;
       if(tail_s){ // if still have element in stack
