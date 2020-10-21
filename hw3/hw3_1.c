@@ -23,13 +23,12 @@ int main(int argc, char *argv[]) {
   node_q *tail_output = NULL;
 
   int pop_element;
-  FILE *input;
+  FILE *input, *output;
   input = fopen(argv[1], "r");
+  output = fopen(argv[2], "w");
   char line[256];
   int count = 1;
   while (fgets(line, sizeof(line), input)) {
-      getchar();
-    printf("%d %s\n",count++, line);
     char *p = strtok(line, " ");
     if (!strcmp(p, "PUSH")) {
       p = strtok(NULL, "\n");
@@ -45,16 +44,15 @@ int main(int argc, char *argv[]) {
       }
       tmp->next = NULL;
       
-    } else if (!strcmp(p, "POP\n")) {
+    } else if (!strcmp(p, "POP\r\n")) { // if something wrong here modify to "POP\n" 
       pop_element = tail_s->value;
       tail_s = tail_s->pre;
-      free(tail_s->next);
-      tail_s->next = NULL;
-      printf("pop:%d\n",pop_element);
-      printf("tail_s:%d\n",tail_s->value);
-
+      if(tail_s){ // if still have element in stack
+        free(tail_s->next);
+        tail_s->next = NULL;
+      }
     } else if (!strcmp(p, "ENQUEUE")) {
-      p = strtok(NULL, "\n");
+      p = strtok(NULL, "\r\n");  // if something wrong here modify to "\n"
         node_q *tmp = malloc(sizeof(node_q));
         tmp->value = pop_element;
         tmp->next = NULL;
@@ -69,9 +67,8 @@ int main(int argc, char *argv[]) {
           else
               head_qB = tail_qB = tmp;
       }
-
     } else if (!strcmp(p, "DEQUEUE")) {
-      p = strtok(NULL, "\n");
+      p = strtok(NULL, "\r\n"); // if something wrong here modify to "\n"
       node_q *tmp;
       if (!strcmp(p, "A")) {
             tmp = head_qA;
@@ -92,18 +89,18 @@ int main(int argc, char *argv[]) {
       }
       if(head_output){
         tail_output = tail_output->next = tmp;
+        tmp->next = NULL;
       }
       else{ // first element in output list
         head_output = tail_output = tmp;
-        printf("head:%d tail:%d\n",head_output->value,tail_output->value);
+        tmp->next = NULL;
       }
-      free(tmp);
     }
   }
   for (node_q *p = head_output; p; p = p->next) {
-    
-    printf("%d\n", p->value);
+    fprintf(output,"%d\n", p->value);
   }
   fclose(input);
+  fclose(output);
   return 0;
 }
