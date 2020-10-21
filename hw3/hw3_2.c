@@ -34,7 +34,7 @@ void print_list(node_t *head, FILE *output) {
       fprintf(output, "%d", tmp->value);
     if (tmp->next)
       fprintf(output, " ");
-    else
+    else if (head->next)
       fprintf(output, "\n");
   }
 }
